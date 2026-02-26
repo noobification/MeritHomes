@@ -146,7 +146,7 @@ const ConstructionSequence = () => {
                         <span className="reveal-word inline-block italic" style={{ opacity: 0, color: 'var(--accent-gold)' }}>it.</span>
                     </h2>
                     <p
-                        className="reveal-subtitle mt-8 text-white/70 text-lg md:text-xl uppercase tracking-[0.3em] font-body font-light"
+                        className="reveal-subtitle mt-8 text-white/70 text-lg md:text-xl uppercase tracking-wide md:tracking-[0.3em] font-body font-light text-center px-10"
                         style={{ opacity: 0, textShadow: "0px 2px 20px rgba(0,0,0,0.5)" }}
                     >
                         We'll take care of the rest.

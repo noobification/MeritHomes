@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { SplineScene } from './SplineScene';
 import './DeconstructionHero.css';
 
-const DeconstructionHero = () => {
+const DeconstructionHero = ({
+    title = "Merit Homes.",
+    subtitle = "where dreams are built from the ground up.",
+    videoSrc = "/hero-bg.mp4",
+    showScrollIndicator = true
+}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [showOverlay, setShowOverlay] = useState(true);
 
@@ -50,21 +55,22 @@ const DeconstructionHero = () => {
                     className="hero-video"
                     onCanPlay={() => setIsLoaded(true)}
                 >
-                    <source src="/hero-bg.mp4" type="video/mp4" />
+                    <source src={videoSrc} type="video/webm" />
+                    <source src={videoSrc.replace('.webm', '.mp4')} type="video/mp4" />
                 </video>
             </div>
 
             <div className="hero-content">
-                <h1 className="hero-title">Merit Homes.</h1>
-                <p className="hero-subtitle">
-                    where dreams are built from the ground up.
-                </p>
+                <h1 className="hero-title">{title}</h1>
+                <p className="hero-subtitle">{subtitle}</p>
             </div>
 
-            <div className="scroll-indicator w-full px-4">
-                <p className="text-center w-full">Scroll down to explore</p>
-                <div className="scroll-line"></div>
-            </div>
+            {showScrollIndicator && (
+                <div className="scroll-indicator w-full px-4">
+                    <p className="text-center w-full">Scroll down to explore</p>
+                    <div className="scroll-line"></div>
+                </div>
+            )}
         </div>
     );
 };

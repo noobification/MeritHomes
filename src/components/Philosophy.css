@@ -21,7 +21,7 @@
 
 .reveal-line {
     @apply font-display text-foreground uppercase tracking-tighter m-0;
-    font-size: clamp(2.5rem, 10vw, 8rem);
+    font-size: clamp(2rem, 8vw, 6.5rem);
     line-height: 0.85;
     padding-bottom: 0.15em;
     margin-bottom: -0.15em;
@@ -34,7 +34,7 @@
 
 .philosophy-p {
     @apply font-body font-light text-foreground/70;
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(0.875rem, 1.5vw, 1.25rem);
     line-height: 1.6;
 }
 

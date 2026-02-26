@@ -69,7 +69,7 @@ const Navigation = () => {
                 </div>
 
                 <div className="nav-links">
-                    <a href="#portfolio" className="nav-link">Portfolio</a>
+                    <a href="#portfolio" className="nav-link">Vision</a>
                     <a href="#process" className="nav-link">Process</a>
                     <a href="#philosophy" className="nav-link">Philosophy</a>
                 </div>
@@ -77,7 +77,7 @@ const Navigation = () => {
                 <div className="nav-action">
                     <a href="#contact" style={{ color: 'inherit', textDecoration: 'none' }}>
                         <LuxeButton onClick={() => console.log('Contact clicked')}>
-                            Contact Us
+                            CONTACT
                         </LuxeButton>
                     </a>
                 </div>

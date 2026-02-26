@@ -31,6 +31,11 @@
     --nav-padding-y: clamp(0.5rem, 2vh, 0.85rem);
     --nav-gap: clamp(0.5rem, 2.5vw, 2.5rem);
     --section-padding: clamp(4rem, 10vh, 8rem) clamp(1.2rem, 5vw, 2rem);
+
+    /* Border Radii */
+    --radius-main: 40px;
+    --radius-ui: 12px;
+    --radius-mobile: 20px;
   }
 
   body {

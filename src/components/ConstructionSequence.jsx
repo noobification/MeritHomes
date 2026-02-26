@@ -13,10 +13,11 @@ const ConstructionSequence = () => {
     useGSAP(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-        const frameCount = 150;
+        const frameCount = 142;
+        const startFrame = 9;
 
         const currentFrame = (index) =>
-            `/sequence/frame_${(index + 1).toString().padStart(4, '0')}.jpg`;
+            `/sequence/frame_${(index + startFrame).toString().padStart(4, '0')}.jpg`;
 
         const images = [];
         const constructionSequence = { frame: frameCount - 1 };
@@ -47,9 +48,30 @@ const ConstructionSequence = () => {
                 const srcHeight = img.height - (cropPixelsY * 2);
                 const srcY = cropPixelsY;
 
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 1. Draw Blurred Background (Filling the entire canvas)
+                context.save();
+                // Zoom background image to fill the canvas and add blur
+                const bgScale = Math.max(canvas.width / srcWidth, canvas.height / srcHeight) * 1.5;
+                const bgWidth = srcWidth * bgScale;
+                const bgHeight = srcHeight * bgScale;
+                const bgX = (canvas.width - bgWidth) / 2;
+                const bgY = (canvas.height - bgHeight) / 2;
+
+                context.filter = 'blur(40px) brightness(1.1)';
+                context.drawImage(
+                    img,
+                    0, srcY, srcWidth, srcHeight,
+                    bgX, bgY, bgWidth, bgHeight
+                );
+                context.restore();
+
+                // 2. Draw Sharp Foreground (Full-bleed / Overflowing)
+                const zoomFactor = 1.1;
                 const hRatio = canvas.width / srcWidth;
                 const vRatio = canvas.height / srcHeight;
-                const ratio = Math.max(hRatio, vRatio);
+                const ratio = Math.max(hRatio, vRatio) * zoomFactor;
 
                 const newWidth = srcWidth * ratio;
                 const newHeight = srcHeight * ratio;
@@ -57,15 +79,19 @@ const ConstructionSequence = () => {
                 const centerShift_x = (canvas.width - newWidth) / 2;
                 const centerShift_y = (canvas.height - newHeight) / 2;
 
-                // On mobile, shifts the center slightly higher to avoid being cut off by the navigation or scroll bar
                 const mobileShiftY = window.innerWidth < 768 ? -canvas.height * 0.05 : 0;
 
-                context.clearRect(0, 0, canvas.width, canvas.height);
+                // Add a subtle drop shadow to the foreground layer
+                context.save();
+                context.shadowColor = 'rgba(0, 0, 0, 0.8)';
+                context.shadowBlur = 100;
+
                 context.drawImage(
                     img,
                     0, srcY, srcWidth, srcHeight,
                     centerShift_x, centerShift_y + mobileShiftY, newWidth, newHeight
                 );
+                context.restore();
             }
         }
 

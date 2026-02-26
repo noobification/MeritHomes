@@ -47,15 +47,22 @@ function App() {
       <CustomCursor />
       <div className="app-container">
         <div className="page-frame"></div>
+        <div className="page-frame-border"></div>
         <header>
           <Navigation />
         </header>
         <main>
-          <DeconstructionHero />
+          <DeconstructionHero videoSrc="/Upscaled.webm" />
           <Philosophy />
           <ConstructionSequence />
           <Process />
           <Portfolio />
+          <DeconstructionHero
+            title="A team you can trust"
+            subtitle="Built on decades of excellence and integrity."
+            videoSrc="/hero-bg.mp4"
+            showScrollIndicator={false}
+          />
           <Contact />
         </main>
         <Footer />

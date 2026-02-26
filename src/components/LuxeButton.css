@@ -1,11 +1,20 @@
 .luxe-btn-container {
     position: relative;
     display: inline-flex;
-    padding: 2px;
-    border-radius: 100px;
-    overflow: visible;
+    padding: 0;
+    border-radius: var(--radius-ui);
+    overflow: hidden;
     background: transparent;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (max-width: 600px) {
+
+    .luxe-btn-container,
+    .luxe-btn,
+    .molten-container {
+        border-radius: var(--radius-mobile);
+    }
 }
 
 .luxe-btn {
@@ -18,8 +27,7 @@
     /* Sophisticated cream color */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(188, 155, 106, 0.3);
-    border-radius: 100px;
+    border-radius: var(--radius-ui);
     color: #0a0a0a;
     font-family: var(--font-body);
     /* Matched to nav links */
@@ -32,6 +40,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     white-space: nowrap;
+    outline: none;
 }
 
 .luxe-btn:hover {
@@ -78,9 +87,7 @@
     z-index: 0;
     mix-blend-mode: multiply;
     /* Better blend on light background */
-    opacity: 0.3;
-    /* Subtle flow */
-    border-radius: 100px;
+    border-radius: var(--radius-ui);
 }
 
 .molten-blob {

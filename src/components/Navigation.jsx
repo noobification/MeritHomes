@@ -1,19 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { GradientButton } from './magicui/gradient-button';
-import { AuroraText } from './magicui/aurora-text';
-import '../magicui-global.css';
+import LuxeButton from "./LuxeButton";
 import './Navigation.css';
 
 const Navigation = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const lastScrollY = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > window.innerHeight * 0.5);
+            const currentScrollY = window.scrollY;
+            const heroHeight = window.innerHeight;
+
+            // Effect for background glassmorphism
+            setScrolled(currentScrollY > 50);
+
+            // Once past hero threshold, stay visible
+            if (currentScrollY > heroHeight - 80) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false); // Hide during hero
+            }
+
+            lastScrollY.current = currentScrollY;
         };
 
-        window.addEventListener('scroll', handleScroll);
+        // Initial check
+        handleScroll();
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -25,12 +41,12 @@ const Navigation = () => {
     });
 
     return (
-        <nav className={`desktop-nav ${scrolled ? 'nav-visible' : 'nav-hidden'}`}>
+        <nav className={`desktop-nav ${isVisible ? 'nav-visible' : 'nav-hidden'} ${scrolled ? 'nav-scrolled' : ''}`}>
             {/* Scroll Progress Bar Wrapper */}
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', borderRadius: 'inherit', pointerEvents: 'none' }}>
                 <motion.div
                     className="progress-bar"
-                    style={{ scaleX }}
+                    style={{ scaleX: scrollYProgress }}
                 />
             </div>
 
@@ -53,32 +69,16 @@ const Navigation = () => {
                 </div>
 
                 <div className="nav-links">
-                    <a href="#philosophy" className="nav-link">Philosophy</a>
+                    <a href="#portfolio" className="nav-link">Portfolio</a>
                     <a href="#process" className="nav-link">Process</a>
-                    <a href="#portfolio" className="nav-link">Gallery</a>
+                    <a href="#philosophy" className="nav-link">Philosophy</a>
                 </div>
 
                 <div className="nav-action">
                     <a href="#contact" style={{ color: 'inherit', textDecoration: 'none' }}>
-                        <GradientButton
-                            size="sm"
-                            variant="ghost"
-                            glowEffect={false} // Disable external glow completely for a cleaner look
-                            style={{
-                                padding: '0.6rem 1.2rem',
-                                borderRadius: '30px',
-                                background: 'transparent', // Remove background effect
-                                border: '1px solid rgba(255, 255, 255, 0.15)',
-                                overflow: 'hidden'
-                            }}
-                        >
-                            <AuroraText
-                                className="text-sm font-medium italic"
-                                style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}
-                            >
-                                Contact Us
-                            </AuroraText>
-                        </GradientButton>
+                        <LuxeButton onClick={() => console.log('Contact clicked')}>
+                            Contact Us
+                        </LuxeButton>
                     </a>
                 </div>
             </div>

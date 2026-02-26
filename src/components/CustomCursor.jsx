@@ -16,6 +16,11 @@ const CustomCursor = () => {
 
         const handleMouseMove = (e) => {
             posRef.current = { x: e.clientX, y: e.clientY };
+
+            // Event delegation for hover state
+            const target = e.target;
+            const isHoverable = target.closest('a, button, [role="button"], input, textarea, select, .nav-link');
+            setIsHovering(!!isHoverable);
         };
 
         const handleMouseEnter = () => setIsHidden(false);
@@ -24,22 +29,6 @@ const CustomCursor = () => {
         window.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseenter', handleMouseEnter);
         document.addEventListener('mouseleave', handleMouseLeave);
-
-        // Detect hoverable elements
-        const addHoverListeners = () => {
-            const interactives = document.querySelectorAll(
-                'a, button, [role="button"], input, textarea, select, .nav-link, .gradient-button'
-            );
-            interactives.forEach((el) => {
-                el.addEventListener('mouseenter', () => setIsHovering(true));
-                el.addEventListener('mouseleave', () => setIsHovering(false));
-            });
-        };
-
-        // Use MutationObserver to re-attach listeners when DOM changes
-        addHoverListeners();
-        const observer = new MutationObserver(addHoverListeners);
-        observer.observe(document.body, { childList: true, subtree: true });
 
         // Animation loop for smooth trailing
         let raf;
@@ -64,7 +53,6 @@ const CustomCursor = () => {
             window.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseenter', handleMouseEnter);
             document.removeEventListener('mouseleave', handleMouseLeave);
-            observer.disconnect();
             cancelAnimationFrame(raf);
         };
     }, []);

@@ -1,0 +1,169 @@
+.hero-sequence-container {
+    @apply relative w-screen m-0 overflow-hidden bg-background;
+    height: 100dvh;
+}
+
+/* Gradient overlay to ensure text readability against any image frame */
+.hero-sequence-container::after {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full z-10 pointer-events-none;
+    background: radial-gradient(circle at center,
+            rgba(10, 10, 10, 0.0) 0%,
+            rgba(10, 10, 10, 0.6) 100%);
+}
+
+.hero-content {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20 w-full px-8 flex flex-col items-center pointer-events-none;
+}
+
+.hero-title {
+    @apply font-display text-foreground uppercase tracking-tight mb-4 mix-blend-difference;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+}
+
+.hero-subtitle {
+    @apply font-body text-xs md:text-sm tracking-[0.2em] uppercase text-foreground/80 max-w-[600px] mx-auto mix-blend-difference;
+}
+
+.scroll-indicator {
+    @apply absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-100 z-20 pointer-events-none text-white;
+}
+
+.scroll-indicator p {
+    @apply text-xs uppercase tracking-[0.3em] text-foreground font-body;
+}
+
+.scroll-line {
+    @apply w-[1px] h-[60px] bg-white;
+    animation: pulseHeight 2s infinite ease-in-out;
+}
+
+@keyframes pulseHeight {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+
+    50% {
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+
+    50.1% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+    }
+}
+
+.loading-overlay {
+    @apply absolute inset-0 z-30 flex items-center justify-center;
+    background: rgb(var(--background));
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loading-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    animation: loaderFadeIn 1s ease forwards;
+}
+
+.loader-icon {
+    opacity: 0.8;
+    animation: loaderPulse 2.5s ease-in-out infinite;
+}
+
+.loader-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(var(--foreground));
+}
+
+.loader-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.loader-line-track {
+    width: 120px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-top: 0.75rem;
+    overflow: hidden;
+    border-radius: 1px;
+}
+
+.loader-line-fill {
+    width: 40%;
+    height: 100%;
+    background: var(--accent-gold);
+    animation: loaderSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes loaderFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loaderPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes loaderSweep {
+    0% {
+        transform: translateX(-150%);
+    }
+
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+.spline-overlay-container {
+    @apply absolute inset-0 w-full h-full z-[2] flex justify-center items-center overflow-hidden;
+}
+
+.spline-overlay {
+    @apply min-w-full min-h-full object-cover origin-center scale-[1.01];
+}
+
+/* Force spline iframe/canvas to cover the container */
+.spline-overlay iframe,
+.spline-overlay canvas {
+    @apply w-full h-full object-cover;
+}

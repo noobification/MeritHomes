@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 10 10 10;
+    --foreground: 255 255 255;
+
+    /* Accents */
+    --accent-gold: #BC9B6A;
+    --accent-gold-hover: #9E8155;
+
+    /* Hero Spline background matching */
+    --spline-bg: #0a0a0a;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --section-padding: clamp(4rem, 10vh, 8rem) clamp(1.2rem, 5vw, 2rem);
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-medium leading-tight;
+  }
+
+  /* Hide scrollbar for seamless look */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* Base Utility Classes */
+.container-safe {
+  @apply max-w-[1400px] mx-auto px-6 w-full;
+}
+
+.section {
+  padding: var(--section-padding);
+}

@@ -1,0 +1,71 @@
+/* Hide the native cursor site-wide on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+
+    *,
+    *::before,
+    *::after {
+        cursor: none !important;
+    }
+}
+
+/* Shared base for both cursor elements */
+.custom-cursor-dot,
+.custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    border-radius: 50%;
+    transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+        height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+        opacity 0.3s ease,
+        background-color 0.3s ease;
+}
+
+/* The inner dot */
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-top: -3px;
+    background-color: var(--accent-gold);
+    opacity: 1;
+}
+
+.custom-cursor-dot.hovering {
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    margin-top: -4px;
+    background-color: #fff;
+}
+
+.custom-cursor-dot.hidden {
+    opacity: 0;
+}
+
+/* The trailing ring */
+.custom-cursor-ring {
+    width: 36px;
+    height: 36px;
+    margin-left: -18px;
+    margin-top: -18px;
+    border: 1px solid rgba(188, 155, 106, 0.4);
+    background: transparent;
+    opacity: 1;
+}
+
+.custom-cursor-ring.hovering {
+    width: 56px;
+    height: 56px;
+    margin-left: -28px;
+    margin-top: -28px;
+    border-color: rgba(188, 155, 106, 0.6);
+    background: rgba(188, 155, 106, 0.05);
+}
+
+.custom-cursor-ring.hidden {
+    opacity: 0;
+}

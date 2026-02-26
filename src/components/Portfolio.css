@@ -1,0 +1,110 @@
+.portfolio-section {
+    position: relative;
+    width: 100%;
+    background-color: rgb(var(--background));
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: var(--section-padding) var(--section-padding);
+    box-sizing: border-box;
+}
+
+.portfolio-header {
+    margin-top: 5vh;
+    text-align: center;
+    z-index: 20;
+    position: relative;
+    width: 100%;
+}
+
+.portfolio-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: rgb(var(--foreground));
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+/* Ethereal Glass Background */
+.portfolio-section .ethereal-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.portfolio-section .orb {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    filter: blur(80px);
+}
+
+.portfolio-section .orb-1 {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--accent-gold) 0%, transparent 60%);
+    bottom: -15%;
+    right: -10%;
+    animation: portfolio-drift 22s infinite alternate ease-in-out;
+}
+
+.portfolio-section .orb-2 {
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(40, 40, 45, 0.8) 0%, transparent 60%);
+    top: -20%;
+    left: -10%;
+    animation: portfolio-drift 28s infinite alternate-reverse ease-in-out;
+}
+
+.portfolio-section .orb-3 {
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, rgba(188, 156, 109, 0.4) 0%, transparent 60%);
+    top: 50%;
+    right: 30%;
+    animation: portfolio-drift 32s infinite alternate ease-in-out;
+}
+
+.portfolio-section .glass-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+}
+
+@keyframes portfolio-drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(8vw, -8vh) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-4vw, 12vh) scale(0.9);
+    }
+
+    100% {
+        transform: translate(-12vw, -4vh) scale(1.05);
+    }
+}
+
+/* Mobile responsive constraints */
+@media (max-width: 600px) {
+    .portfolio-title {
+        font-size: 2.2rem;
+    }
+}

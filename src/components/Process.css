@@ -1,0 +1,69 @@
+.process-section {
+    @apply relative w-full bg-background min-h-[300vh];
+    /* Ensures enough scroll space */
+}
+
+/* Sticky Backgrounds */
+.process-backgrounds {
+    @apply sticky top-0 w-full h-[100vh] overflow-hidden z-0;
+}
+
+.process-bg-image {
+    @apply absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out opacity-0;
+    will-change: opacity;
+}
+
+.process-bg-image.active {
+    @apply opacity-100;
+}
+
+/* Dark gradient overlay to ensure text is always readable over photos */
+.process-bg-overlay {
+    @apply absolute inset-0 bg-background/70 z-10 pointer-events-none;
+}
+
+/* Scrolling Content */
+.process-content-container {
+    @apply relative z-20 w-full max-w-[1400px] mx-auto;
+    /* Negative margin pulls the content up over the sticky background */
+    margin-top: -100vh;
+}
+
+.process-step {
+    @apply w-full h-[100vh] flex items-center justify-center px-4 md:px-24;
+}
+
+.process-text-card {
+    @apply w-full max-w-[600px] p-8 md:p-12 relative overflow-hidden;
+    /* Glassmorphism styling matching the navigation */
+    background: rgba(10, 10, 10, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.process-header {
+    @apply flex items-end gap-4 mb-6;
+}
+
+.process-number {
+    @apply font-display text-4xl md:text-5xl text-accent font-light leading-none;
+}
+
+.process-subtitle {
+    @apply font-body text-xs tracking-[0.2em] uppercase text-foreground/60 mb-2;
+}
+
+.process-title {
+    @apply font-display text-3xl md:text-5xl text-foreground mb-6 uppercase tracking-tight leading-none;
+}
+
+.process-description {
+    @apply font-body text-base md:text-lg text-foreground/80 font-light leading-relaxed;
+}
+
+/* Add a subtle accent line decoration */
+.process-text-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-[2px] bg-accent;
+}

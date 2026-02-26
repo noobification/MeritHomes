@@ -8,6 +8,3 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
-
-// Signal to prerenderer that the app is fully rendered
-document.dispatchEvent(new Event('app-rendered'))

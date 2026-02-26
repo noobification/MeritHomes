@@ -57,11 +57,14 @@ const ConstructionSequence = () => {
                 const centerShift_x = (canvas.width - newWidth) / 2;
                 const centerShift_y = (canvas.height - newHeight) / 2;
 
+                // On mobile, shifts the center slightly higher to avoid being cut off by the navigation or scroll bar
+                const mobileShiftY = window.innerWidth < 768 ? -canvas.height * 0.05 : 0;
+
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(
                     img,
                     0, srcY, srcWidth, srcHeight,
-                    centerShift_x, centerShift_y, newWidth, newHeight
+                    centerShift_x, centerShift_y + mobileShiftY, newWidth, newHeight
                 );
             }
         }
@@ -129,7 +132,7 @@ const ConstructionSequence = () => {
                 {/* Reveal text — staggered during and after scroll */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
                     <h2
-                        className="text-5xl md:text-7xl lg:text-9xl font-display text-white text-center tracking-tight leading-[0.9]"
+                        className="text-4xl md:text-7xl lg:text-9xl font-display text-white text-center tracking-tight leading-[0.9] px-4"
                         style={{ textShadow: "0px 4px 50px rgba(0,0,0,0.8)" }}
                     >
                         <span className="reveal-word inline-block" style={{ opacity: 0 }}>All&nbsp;</span>

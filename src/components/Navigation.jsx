@@ -65,6 +65,7 @@ const Navigation = () => {
                             variant="ghost"
                             gradientColors={['var(--accent-gold)', '#ffffff', 'var(--accent-gold)']}
                             animationSpeed={3}
+                            glowEffect={window.innerWidth > 768} // Disable glow on mobile to fix shadow issue
                             style={{
                                 padding: '0.7rem 1.5rem',
                                 borderRadius: '30px',

@@ -41,12 +41,17 @@ const DeconstructionHero = () => {
                     </div>
                 </div>
             )}
-            <div className="spline-overlay-container">
-                <SplineScene
-                    scene="https://prod.spline.design/oE8ZJS1l2fvVORXl/scene.splinecode"
-                    className="spline-overlay"
-                    onLoad={() => setIsLoaded(true)}
-                />
+            <div className="video-background-container">
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="hero-video"
+                    onCanPlay={() => setIsLoaded(true)}
+                >
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-interior-with-minimalist-design-4421-large.mp4" type="video/mp4" />
+                </video>
             </div>
 
             <div className="hero-content">
@@ -56,8 +61,8 @@ const DeconstructionHero = () => {
                 </p>
             </div>
 
-            <div className="scroll-indicator">
-                <p>Scroll down to explore</p>
+            <div className="scroll-indicator w-full px-4">
+                <p className="text-center w-full">Scroll down to explore</p>
                 <div className="scroll-line"></div>
             </div>
         </div>

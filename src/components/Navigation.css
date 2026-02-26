@@ -140,14 +140,12 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .desktop-nav {
-        top: 0.2rem;
-        /* Keep it flush against the top without looking clipped */
-        padding: 0.8rem 1rem;
-        width: 95%;
-        border-radius: 40px;
-        /* Restore pill shape */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        /* Lifts the pill */
+        top: 0.8rem;
+        padding: 0.5rem 0.8rem;
+        width: 92%;
+        border-radius: 100px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     /* Fixed premium gradient mask to fade out scrolling content before it peeks through the gaps */

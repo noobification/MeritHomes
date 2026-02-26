@@ -72,7 +72,8 @@ const ThreeDHoverGallery = ({
     };
 
     const handleImageHover = (index, image) => {
-        if (!autoPlay) {
+        // Disable auto-zoom/active-state on hover for touch devices
+        if (!autoPlay && !isMobile) {
             setActiveIndex(index);
         }
         onImageHover?.(index, image);

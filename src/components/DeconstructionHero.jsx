@@ -50,7 +50,7 @@ const DeconstructionHero = () => {
                     className="hero-video"
                     onCanPlay={() => setIsLoaded(true)}
                 >
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-interior-with-minimalist-design-4421-large.mp4" type="video/mp4" />
+                    <source src="/hero-bg.mp4" type="video/mp4" />
                 </video>
             </div>
 

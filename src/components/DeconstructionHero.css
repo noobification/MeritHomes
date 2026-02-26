@@ -45,3 +45,75 @@
 .hero-video {
     @apply w-full h-full object-cover;
 }
+
+.loading-overlay {
+    @apply fixed inset-0 z-[100] flex items-center justify-center;
+    background: #0a0a0a;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loading-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    @apply flex flex-col items-center gap-5 text-center;
+    animation: loaderFadeIn 1s ease forwards;
+}
+
+.loader-icon {
+    opacity: 0.8;
+    animation: loaderPulse 2.5s ease-in-out infinite;
+}
+
+.loader-title {
+    @apply font-display text-2xl font-medium uppercase tracking-[0.15em] text-foreground;
+}
+
+.loader-subtitle {
+    @apply font-body text-[0.7rem] uppercase tracking-[0.3em] text-white/40;
+}
+
+.loader-line-track {
+    @apply w-[120px] h-[1px] bg-white/10 mt-3 overflow-hidden rounded-full;
+}
+
+.loader-line-fill {
+    @apply w-[40%] h-full bg-accent-gold;
+    animation: loaderSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes loaderFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loaderPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes loaderSweep {
+    0% {
+        transform: translateX(-150%);
+    }
+
+    100% {
+        transform: translateX(400%);
+    }
+}

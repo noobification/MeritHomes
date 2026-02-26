@@ -63,21 +63,21 @@ const Navigation = () => {
                         <GradientButton
                             size="sm"
                             variant="ghost"
-                            gradientColors={['var(--accent-gold)', '#ffffff', 'var(--accent-gold)']}
-                            animationSpeed={3}
-                            glowEffect={window.innerWidth > 768} // Disable glow on mobile to fix shadow issue
+                            glowEffect={false} // Disable external glow completely for a cleaner look
                             style={{
-                                padding: '0.7rem 1.5rem',
+                                padding: '0.6rem 1.2rem',
                                 borderRadius: '30px',
-                                fontFamily: 'var(--font-display)',
-                                letterSpacing: '0.05em',
-                                fontSize: '0.85rem',
-                                color: '#ffffff',
-                                fontWeight: 400,
-                                fontStyle: 'italic',
+                                background: 'transparent', // Remove background effect
+                                border: '1px solid rgba(255, 255, 255, 0.15)',
+                                overflow: 'hidden'
                             }}
                         >
-                            <span style={{ position: 'relative', zIndex: 1 }}>Contact Us</span>
+                            <AuroraText
+                                className="text-sm font-medium italic"
+                                style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}
+                            >
+                                Contact Us
+                            </AuroraText>
                         </GradientButton>
                     </a>
                 </div>

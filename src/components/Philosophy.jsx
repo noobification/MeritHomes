@@ -46,7 +46,7 @@ const Philosophy = () => {
         <section className="philosophy-section" id="philosophy" ref={sectionRef}>
             <div className="container-safe relative z-10">
                 <div className="philosophy-text-container">
-                    <h2 className="sr-only">We don't just build homes. We craft your forever.</h2>
+                    <h2 className="sr-only">We don't just build homes. We craft your next chapter.</h2>
                     <div className="line-wrapper" aria-hidden="true">
                         <span className="reveal-line">WE DON'T JUST</span>
                     </div>
@@ -57,10 +57,10 @@ const Philosophy = () => {
                         <span className="reveal-line">WE CRAFT</span>
                     </div>
                     <div className="line-wrapper" aria-hidden="true">
-                        <span className="reveal-line text-foreground/30">YOUR</span>
+                        <span className="reveal-line text-foreground/30">YOUR NEXT</span>
                     </div>
                     <div className="line-wrapper" aria-hidden="true">
-                        <span className="reveal-line text-foreground/30">FOREVER.</span>
+                        <span className="reveal-line text-foreground/30">CHAPTER.</span>
                     </div>
                 </div>
 

@@ -9,6 +9,7 @@ const ConstructionSequence = () => {
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
     const revealRef = useRef(null);
+    const scrollHintRef = useRef(null);
 
     useGSAP(() => {
         const canvas = canvasRef.current;
@@ -22,14 +23,38 @@ const ConstructionSequence = () => {
         const images = [];
         const constructionSequence = { frame: frameCount - 1 };
 
-        for (let i = 0; i < frameCount; i++) {
-            const img = new Image();
-            img.onload = () => {
-                if (i === frameCount - 1) render();
-            };
-            img.src = currentFrame(i);
-            images.push(img);
-        }
+        // Tiered Loading Strategy
+        const loadFrame = (i) => {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    images[i] = img;
+                    if (i === frameCount - 1) render();
+                    resolve();
+                };
+                img.src = currentFrame(i);
+            });
+        };
+
+        // Tier 1: Initial frames (Immediate)
+        const loadInitialTier = async () => {
+            const initialPromises = [];
+            for (let i = 0; i < 10; i++) {
+                initialPromises.push(loadFrame(i));
+            }
+            await Promise.all(initialPromises);
+            render();
+
+            // Tier 2 & 3: Remaining frames (Deferred)
+            // Use requestIdleCallback or setTimeout to avoid blocking main thread
+            setTimeout(() => {
+                for (let i = 10; i < frameCount; i++) {
+                    loadFrame(i);
+                }
+            }, 500);
+        };
+
+        loadInitialTier();
 
         function render() {
             if (!canvas) return;
@@ -147,6 +172,26 @@ const ConstructionSequence = () => {
             }
         );
 
+        // Scroll Hint Animation
+        gsap.to(".scroll-wheel", {
+            y: 48,
+            duration: 1.5,
+            repeat: -1,
+            ease: "power1.inOut"
+        });
+
+        // Scroll Hint Fade Out
+        gsap.to(scrollHintRef.current, {
+            opacity: 0,
+            y: -20,
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "5% top",
+                scrub: true,
+            }
+        });
+
         return () => window.removeEventListener('resize', render);
     }, { scope: containerRef });
 
@@ -177,6 +222,17 @@ const ConstructionSequence = () => {
                     >
                         We'll take care of the rest.
                     </p>
+                </div>
+
+                {/* Scroll Hint Indicator */}
+                <div
+                    ref={scrollHintRef}
+                    className="absolute top-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 pointer-events-none"
+                >
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-body">Keep Scrolling</span>
+                    <div className="w-[1px] h-12 bg-gradient-to-b from-white/0 via-accent-gold/50 to-white/0 relative overflow-hidden">
+                        <div className="scroll-wheel absolute top-0 left-0 w-full h-1/3 bg-accent-gold"></div>
+                    </div>
                 </div>
             </div>
         </section>

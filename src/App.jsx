@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import Navigation from './components/Navigation';
 import DeconstructionHero from './components/DeconstructionHero';
 import ConstructionSequence from './components/ConstructionSequence';
-import Philosophy from './components/Philosophy';
-import Process from './components/Process';
-import Portfolio from './components/Portfolio';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
+const Philosophy = lazy(() => import('./components/Philosophy'));
+const Process = lazy(() => import('./components/Process'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -44,7 +44,9 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
+      <Suspense fallback={null}>
+        <CustomCursor />
+      </Suspense>
       <div className="app-container">
         <div className="page-frame"></div>
         <div className="page-frame-border"></div>
@@ -53,19 +55,27 @@ function App() {
         </header>
         <main>
           <DeconstructionHero videoSrc="/Upscaled.webm" />
-          <Philosophy />
+          <Suspense fallback={<div className="h-screen bg-background" />}>
+            <Philosophy />
+          </Suspense>
           <ConstructionSequence />
-          <Process />
-          <Portfolio />
+          <Suspense fallback={<div className="h-screen bg-background" />}>
+            <Process />
+            <Portfolio />
+          </Suspense>
           <DeconstructionHero
             title="A team you can trust"
             subtitle="Built on decades of excellence and integrity."
             videoSrc="/hero-bg.mp4"
             showScrollIndicator={false}
           />
-          <Contact />
+          <Suspense fallback={<div className="h-screen bg-background" />}>
+            <Contact />
+          </Suspense>
         </main>
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </div>
     </>
   );

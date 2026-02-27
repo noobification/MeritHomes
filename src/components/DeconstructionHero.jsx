@@ -12,11 +12,20 @@ const DeconstructionHero = ({
     const [showOverlay, setShowOverlay] = useState(true);
 
     useEffect(() => {
+        // Fallback: If video takes too long, reveal the site anyway
+        const fallbackTimer = setTimeout(() => {
+            if (!isLoaded) setIsLoaded(true);
+        }, 1500);
+
         if (isLoaded) {
             // Allow the fade-out animation to complete before removing from DOM
             const timer = setTimeout(() => setShowOverlay(false), 900);
-            return () => clearTimeout(timer);
+            return () => {
+                clearTimeout(timer);
+                clearTimeout(fallbackTimer);
+            };
         }
+        return () => clearTimeout(fallbackTimer);
     }, [isLoaded]);
 
     return (

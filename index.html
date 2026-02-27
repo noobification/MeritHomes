@@ -86,6 +86,20 @@
 
 <body>
   <div id="root"></div>
+
+  <!-- Hidden static form for Netlify recognition -->
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <select name="timeline">
+      <option>Within 6 months</option>
+      <option>6 - 12 months</option>
+      <option>1 - 2 years</option>
+      <option>Exploring options</option>
+    </select>
+    <textarea name="message"></textarea>
+  </form>
+
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

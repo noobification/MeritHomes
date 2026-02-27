@@ -61,11 +61,23 @@ const DeconstructionHero = ({
                     muted
                     loop
                     playsInline
+                    preload="auto"
                     className="hero-video"
                     onCanPlay={() => setIsLoaded(true)}
                 >
-                    <source src={videoSrc} type="video/webm" />
-                    <source src={videoSrc.replace('.webm', '.mp4')} type="video/mp4" />
+                    {videoSrc.endsWith('.webm') ? (
+                        <>
+                            <source src={videoSrc} type="video/webm" />
+                            <source src={videoSrc.replace('.webm', '.mp4')} type="video/mp4" />
+                        </>
+                    ) : (
+                        <>
+                            <source src={videoSrc} type="video/mp4" />
+                            {videoSrc.includes('.mp4') && (
+                                <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
+                            )}
+                        </>
+                    )}
                 </video>
             </div>
 

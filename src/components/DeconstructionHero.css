@@ -43,8 +43,8 @@
     text-transform: uppercase;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
-    mix-blend-mode: difference;
     font-size: clamp(2.5rem, 8vw, 6rem);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
@@ -55,7 +55,7 @@
     color: rgba(255, 255, 255, 0.8);
     max-width: 600px;
     margin: 0 auto;
-    mix-blend-mode: difference;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .scroll-indicator {

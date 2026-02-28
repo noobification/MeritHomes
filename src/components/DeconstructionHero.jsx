@@ -15,7 +15,7 @@ const DeconstructionHero = ({
         // Fallback: If video takes too long, reveal the site anyway
         const fallbackTimer = setTimeout(() => {
             if (!isLoaded) setIsLoaded(true);
-        }, 1500);
+        }, 800);
 
         if (isLoaded) {
             // Allow the fade-out animation to complete before removing from DOM
@@ -63,7 +63,7 @@ const DeconstructionHero = ({
                     playsInline
                     preload="auto"
                     className="hero-video"
-                    onCanPlay={() => setIsLoaded(true)}
+                    onLoadedData={() => setIsLoaded(true)}
                 >
                     {videoSrc.endsWith('.webm') ? (
                         <>

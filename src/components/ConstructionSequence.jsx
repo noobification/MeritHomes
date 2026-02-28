@@ -187,7 +187,7 @@ const ConstructionSequence = () => {
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: "5% top",
+                end: "15% top",
                 scrub: true,
             }
         });
@@ -229,7 +229,7 @@ const ConstructionSequence = () => {
                     ref={scrollHintRef}
                     className="absolute top-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 pointer-events-none"
                 >
-                    <span className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-body">Keep Scrolling</span>
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-white/60 font-body">Keep Scrolling</span>
                     <div className="w-[1px] h-12 bg-gradient-to-b from-white/0 via-accent-gold/50 to-white/0 relative overflow-hidden">
                         <div className="scroll-wheel absolute top-0 left-0 w-full h-1/3 bg-accent-gold"></div>
                     </div>

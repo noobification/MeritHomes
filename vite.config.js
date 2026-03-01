@@ -9,7 +9,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor-gsap': ['gsap', '@gsap/react'],
-          'vendor-spline': ['@splinetool/react-spline', '@splinetool/runtime'],
           'vendor-motion': ['framer-motion'],
         }
       }

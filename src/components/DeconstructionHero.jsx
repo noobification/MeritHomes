@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SplineScene } from './SplineScene';
+// import { SplineScene } from './SplineScene'; // Removed dead code
 import './DeconstructionHero.css';
 
 const DeconstructionHero = ({

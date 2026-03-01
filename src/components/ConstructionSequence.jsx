@@ -18,7 +18,7 @@ const ConstructionSequence = () => {
         const startFrame = 9;
 
         const currentFrame = (index) =>
-            `/sequence/frame_${(index + startFrame).toString().padStart(4, '0')}.jpg`;
+            `/sequence/frame_${(index + startFrame).toString().padStart(4, '0')}.webp`;
 
         const images = [];
         const constructionSequence = { frame: frameCount - 1 };
@@ -44,17 +44,21 @@ const ConstructionSequence = () => {
             }
             await Promise.all(initialPromises);
             render();
-
-            // Tier 2 & 3: Remaining frames (Deferred)
-            // Use requestIdleCallback or setTimeout to avoid blocking main thread
-            setTimeout(() => {
-                for (let i = 10; i < frameCount; i++) {
-                    loadFrame(i);
-                }
-            }, 500);
         };
 
-        loadInitialTier();
+        const loadRemainingFrames = async () => {
+            const batchSize = 10;
+            for (let i = 10; i < frameCount; i += batchSize) {
+                const batch = [];
+                for (let j = i; j < Math.min(i + batchSize, frameCount); j++) {
+                    batch.push(loadFrame(j));
+                }
+                await Promise.all(batch);
+                await new Promise(r => setTimeout(r, 100));
+            }
+        };
+
+        loadInitialTier().then(loadRemainingFrames);
 
         function render() {
             if (!canvas) return;

@@ -47,6 +47,9 @@ const ConstructionSequence = () => {
         };
 
         const loadRemainingFrames = async () => {
+            // Priority Delay: Give other lazy-loaded sections a "clear runway" to fetch their CSS/JS first
+            await new Promise(r => setTimeout(r, 1500));
+
             const batchSize = 10;
             for (let i = 10; i < frameCount; i += batchSize) {
                 const batch = [];
@@ -58,7 +61,17 @@ const ConstructionSequence = () => {
             }
         };
 
-        loadInitialTier().then(loadRemainingFrames);
+        // Scroll-Sync: Only start loading when the section is near the viewport
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadInitialTier().then(loadRemainingFrames);
+                observer.disconnect();
+            }
+        }, { rootMargin: "20% 0px", threshold: 0.1 });
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
 
         function render() {
             if (!canvas) return;

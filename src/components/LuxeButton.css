@@ -8,12 +8,24 @@
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .luxe-btn {
+        padding: 0.4rem 1rem;
+        /* R_btn = R_nav (12px) - 4px (padding) = 8px */
+        border-radius: 8px;
+    }
 
     .luxe-btn-container,
-    .luxe-btn,
     .molten-container {
-        border-radius: var(--radius-mobile);
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 380px) {
+    .luxe-btn {
+        padding: 0.2rem 0.35rem;
+        font-size: 0.42rem;
+        letter-spacing: 0.01em;
     }
 }
 

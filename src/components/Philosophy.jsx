@@ -1,46 +1,46 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import './Philosophy.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Philosophy = () => {
     const sectionRef = useRef(null);
+    console.log('Philosophy component render');
 
-    useEffect(() => {
-        let ctx = gsap.context(() => {
-            const lines = gsap.utils.toArray('.reveal-line');
+    useGSAP(() => {
+        if (!sectionRef.current) return;
 
-            // Mask reveal animation for each line
-            gsap.from(lines, {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                    end: "top 25%",
-                    scrub: 1,
-                },
-                y: 100,
-                opacity: 0,
-                stagger: 0.1,
-                ease: "power3.out"
-            });
+        const lines = gsap.utils.toArray('.reveal-line');
 
-            // Subtle parallax for the section background/text to interplay with scroll
-            gsap.to('.philosophy-text-container', {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true,
-                },
-                y: -50,
-                ease: "none"
-            });
-        }, sectionRef);
+        // Mask reveal animation for each line
+        gsap.from(lines, {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 75%",
+                end: "top 25%",
+                scrub: 1,
+            },
+            y: 100,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "power3.out"
+        });
 
-        return () => ctx.revert();
-    }, []);
+        // Subtle parallax for the section background/text to interplay with scroll
+        gsap.to('.philosophy-text-container', {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            },
+            y: -50,
+            ease: "none"
+        });
+    }, { scope: sectionRef });
 
     return (
         <section className="philosophy-section" id="philosophy" ref={sectionRef}>

@@ -1,8 +1,8 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import Navigation from './components/Navigation';
 import DeconstructionHero from './components/DeconstructionHero';
-import ConstructionSequence from './components/ConstructionSequence';
-const Philosophy = lazy(() => import('./components/Philosophy'));
+import LineArtConstruction from './components/LineArtConstruction';
+import Philosophy from './components/Philosophy';
 const Process = lazy(() => import('./components/Process'));
 const Portfolio = lazy(() => import('./components/Portfolio'));
 const Contact = lazy(() => import('./components/Contact'));
@@ -58,7 +58,7 @@ function App() {
           <Suspense fallback={<div className="h-screen bg-background" />}>
             <Philosophy />
           </Suspense>
-          <ConstructionSequence />
+          <LineArtConstruction />
           <Suspense fallback={<div className="h-screen bg-background" />}>
             <Process />
             <Portfolio />

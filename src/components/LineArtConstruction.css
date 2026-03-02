@@ -1,0 +1,47 @@
+.line-art-section {
+    background-color: var(--background);
+    z-index: 5;
+    height: 100vh;
+}
+
+.reveal-word {
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+svg {
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+}
+
+@keyframes scroll-dot {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(300%);
+        opacity: 0;
+    }
+}
+
+.animate-scroll-dot {
+    animation: scroll-dot 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.scroll-indicator-container {
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+}
+
+@media (max-width: 768px) {
+    .line-art-section {
+        height: 100vh;
+    }
+}

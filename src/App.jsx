@@ -1,9 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import 'lenis/dist/lenis.css';
 import './App.css';
 
@@ -33,32 +30,52 @@ const Chicago = lazy(() => import('./pages/Chicago'));
 const Footer = lazy(() => import('./components/Footer'));
 const CustomCursor = lazy(() => import('./components/CustomCursor'));
 
-gsap.registerPlugin(ScrollTrigger);
-
 function App() {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+    // Dynamically import heavy animation libraries only on desktop or after initial idle
+    // to prevent mobile CPU pipeline blocking
+    const initSmoothScroll = async () => {
+      // Small delay to let the browser breathe during initial paint
+      await new Promise(resolve => setTimeout(resolve, 100));
 
-    lenis.on('scroll', ScrollTrigger.update);
+      const { default: Lenis } = await import('lenis');
+      const { default: gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.ticker.lagSmoothing(0);
+      const lenis = new Lenis({
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
 
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Cleanup
+      return () => {
+        lenis.destroy();
+        gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      };
     };
+
+    let cleanup = () => { };
+    // On mobile, we might skip Lenis entirely to save battery and CPU, or defer it heavily
+    if (window.innerWidth >= 768) {
+      initSmoothScroll().then(fn => { if (fn) cleanup = fn; });
+    }
+
+    return () => cleanup();
   }, []);
 
   return (

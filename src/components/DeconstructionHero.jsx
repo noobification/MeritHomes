@@ -9,23 +9,34 @@ const DeconstructionHero = ({
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [showOverlay, setShowOverlay] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        // Fallback: If video takes too long, reveal the site anyway
-        const fallbackTimer = setTimeout(() => {
-            if (!isLoaded) setIsLoaded(true);
-        }, 800);
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
 
-        if (isLoaded) {
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    useEffect(() => {
+        // Fallback: If video takes too long OR if we are on mobile (where video doesn't load), reveal the site
+        const fallbackTimer = setTimeout(() => {
+            if (!isLoaded || isMobile) setIsLoaded(true);
+        }, isMobile ? 100 : 800); // Super fast reveal on mobile
+
+        if (isLoaded || isMobile) {
             // Allow the fade-out animation to complete before removing from DOM
-            const timer = setTimeout(() => setShowOverlay(false), 900);
+            const timer = setTimeout(() => setShowOverlay(false), isMobile ? 300 : 900);
             return () => {
                 clearTimeout(timer);
                 clearTimeout(fallbackTimer);
             };
         }
         return () => clearTimeout(fallbackTimer);
-    }, [isLoaded]);
+    }, [isLoaded, isMobile]);
 
     return (
         <div className="hero-sequence-container">
@@ -55,29 +66,43 @@ const DeconstructionHero = ({
                 </div>
             )}
             <div className="video-background-container">
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    className="hero-video"
-                    onLoadedData={() => setIsLoaded(true)}
-                >
-                    {videoSrc.endsWith('.webm') ? (
-                        <>
-                            <source src={videoSrc} type="video/webm" />
-                            <source src={videoSrc.replace('.webm', '.mp4')} type="video/mp4" />
-                        </>
-                    ) : (
-                        <>
-                            <source src={videoSrc} type="video/mp4" />
-                            {videoSrc.includes('.mp4') && (
-                                <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
-                            )}
-                        </>
-                    )}
-                </video>
+                {isMobile ? (
+                    <div className="mobile-hero-fallback" style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+                        zIndex: -1
+                    }}>
+                        {/* Mobile users get a highly optimized gradient background instead of a 15MB video */}
+                    </div>
+                ) : (
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        className="hero-video"
+                        onLoadedData={() => setIsLoaded(true)}
+                    >
+                        {videoSrc.endsWith('.webm') ? (
+                            <>
+                                <source src={videoSrc} type="video/webm" />
+                                <source src={videoSrc.replace('.webm', '.mp4')} type="video/mp4" />
+                            </>
+                        ) : (
+                            <>
+                                <source src={videoSrc} type="video/mp4" />
+                                {videoSrc.includes('.mp4') && (
+                                    <source src={videoSrc.replace('.mp4', '.webm')} type="video/webm" />
+                                )}
+                            </>
+                        )}
+                    </video>
+                )}
             </div>
 
             <div className="hero-content">

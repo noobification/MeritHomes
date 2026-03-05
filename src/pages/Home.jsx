@@ -1,7 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import DeconstructionHero from '../components/DeconstructionHero';
-import LineArtConstruction from '../components/LineArtConstruction';
-import Philosophy from '../components/Philosophy';
+
+// Lazy load all below-the-fold components to defer their heavy animation dependencies
+const LineArtConstruction = lazy(() => import('../components/LineArtConstruction'));
+const Philosophy = lazy(() => import('../components/Philosophy'));
 const Process = lazy(() => import('../components/Process'));
 const Portfolio = lazy(() => import('../components/Portfolio'));
 const Contact = lazy(() => import('../components/Contact'));
@@ -12,9 +14,7 @@ function Home() {
             <DeconstructionHero videoSrc="/Upscaled.webm" />
             <Suspense fallback={<div className="h-screen bg-background" />}>
                 <Philosophy />
-            </Suspense>
-            <LineArtConstruction />
-            <Suspense fallback={<div className="h-screen bg-background" />}>
+                <LineArtConstruction />
                 <Process />
                 <Portfolio />
             </Suspense>

@@ -69,6 +69,7 @@ const Navigation = () => {
                 </div>
 
                 <div className="nav-links">
+                    <a href="/chicago" className="nav-link">Regions</a>
                     <a href="#portfolio" className="nav-link">Vision</a>
                     <a href="#process" className="nav-link">Process</a>
                     <a href="#philosophy" className="nav-link">Philosophy</a>

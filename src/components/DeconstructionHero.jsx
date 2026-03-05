@@ -73,10 +73,13 @@ const DeconstructionHero = ({
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+                        backgroundImage: 'url(/mobile-hero-poster.webp)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        opacity: 0.6,
                         zIndex: -1
                     }}>
-                        {/* Mobile users get a highly optimized gradient background instead of a 15MB video */}
+                        {/* Mobile users get the highly optimized WebP poster image instead of a 15MB video */}
                     </div>
                 ) : (
                     <video

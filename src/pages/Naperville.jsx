@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import LocationLayout from '../components/LocationLayout';
 import LineArtConstruction from '../components/LineArtConstruction';
+import HeroBackground from '../components/HeroBackground';
 
 const Philosophy = lazy(() => import('../components/Philosophy'));
 const Process = lazy(() => import('../components/Process'));
@@ -65,19 +66,7 @@ function Naperville() {
                 <section ref={heroRef} className="w-full relative overflow-hidden flex flex-col justify-center min-h-[85vh] pt-40 pb-32 bg-zinc-900">
 
                     {/* Aesthetic Video Background */}
-                    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-                        <div className="absolute inset-0 bg-black/40 z-10"></div>
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-full object-cover opacity-60"
-                        >
-                            <source src="/Upscaled.webm" type="video/webm" />
-                            <source src="/hero-bg.mp4" type="video/mp4" />
-                        </video>
-                    </div>
+                    <HeroBackground />
 
                     <div ref={contentRef} className="container mx-auto px-6 z-10 relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center lg:items-end">
 

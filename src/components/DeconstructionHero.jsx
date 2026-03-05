@@ -5,6 +5,7 @@ const DeconstructionHero = ({
     title = "Merit Homes.",
     subtitle = "where dreams are built from the ground up.",
     videoSrc = "/hero-bg.mp4",
+    mobilePoster = "/mobile-hero-poster.webp",
     showScrollIndicator = true
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -73,7 +74,7 @@ const DeconstructionHero = ({
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        backgroundImage: 'url(/mobile-hero-poster.webp)',
+                        backgroundImage: `url(${mobilePoster})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         opacity: 0.6,

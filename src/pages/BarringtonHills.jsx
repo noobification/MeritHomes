@@ -3,7 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import LocationLayout from '../components/LocationLayout';
-import LineArtConstruction from '../components/LineArtConstruction';
+const LineArtConstruction = lazy(() => import('../components/LineArtConstruction'));
+import ViewportTrigger from '../components/ViewportTrigger';
 import HeroBackground from '../components/HeroBackground';
 
 const Philosophy = lazy(() => import('../components/Philosophy'));
@@ -119,20 +120,20 @@ function BarringtonHills() {
                     <div className="absolute top-1/2 right-0 w-[600px] h-[800px] bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3"></div>
                 </section>
 
-                <Suspense fallback={<div className="h-screen bg-background" />}>
+                <ViewportTrigger fallback={<div className="h-screen bg-background" />}>
                     <Philosophy />
-                </Suspense>
+                </ViewportTrigger>
 
-                <LineArtConstruction />
+                <ViewportTrigger fallback={<div className="h-screen bg-background" />}><LineArtConstruction /></ViewportTrigger>
 
-                <Suspense fallback={<div className="h-screen bg-background" />}>
+                <ViewportTrigger fallback={<div className="h-screen bg-background" />}>
                     <Process />
                     <Portfolio />
-                </Suspense>
+                </ViewportTrigger>
 
-                <Suspense fallback={<div className="h-screen bg-background" />}>
+                <ViewportTrigger fallback={<div className="h-screen bg-background" />}>
                     <Contact />
-                </Suspense>
+                </ViewportTrigger>
             </main>
         </LocationLayout>
     );

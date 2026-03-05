@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import LuxeButton from "./LuxeButton";
 import './Navigation.css';
 
@@ -8,10 +7,19 @@ const Navigation = () => {
     const [isVisible, setIsVisible] = useState(false);
     const lastScrollY = useRef(0);
 
+    const progressBarRef = useRef(null);
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
             const heroHeight = window.innerHeight;
+
+            // Calculate scroll progress for top bar
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? (currentScrollY / scrollHeight) : 0;
+            if (progressBarRef.current) {
+                progressBarRef.current.style.transform = `scaleX(${progress})`;
+            }
 
             // Effect for background glassmorphism
             setScrolled(currentScrollY > 50);
@@ -33,20 +41,13 @@ const Navigation = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
-
     return (
         <nav className={`desktop-nav ${isVisible ? 'nav-visible' : 'nav-hidden'} ${scrolled ? 'nav-scrolled' : ''}`}>
-            {/* Scroll Progress Bar Wrapper */}
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', borderRadius: 'inherit', pointerEvents: 'none' }}>
-                <motion.div
+                <div
+                    ref={progressBarRef}
                     className="progress-bar"
-                    style={{ scaleX: scrollYProgress }}
+                    style={{ transform: 'scaleX(0)', transformOrigin: 'left', transition: 'transform 0.1s ease-out' }}
                 />
             </div>
 

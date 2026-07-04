@@ -57,8 +57,12 @@ const CustomCursor = () => {
         };
     }, []);
 
-    // Don't render on touch devices
-    if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    // Don't render on touch devices or for users preferring reduced motion
+    if (typeof window !== 'undefined' && (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )) {
         return null;
     }
 

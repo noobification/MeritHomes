@@ -11,28 +11,28 @@ const processSteps = [
         title: 'Architectural Vision',
         subtitle: 'SITING & DESIGN',
         description: 'Every masterpiece begins with an understanding of its canvas. We collaborate closely with renowned architects to ensure your home harmonizes with its environment, maximizing natural light and capturing the unique essence of your lot.',
-        image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=70&w=2000&auto=format&fit=crop&fm=webp' // Architectural blueprint/modern home concept
+        image: '/images/process/design-blueprint.webp' // Architectural blueprint/modern home concept
     },
     {
         id: '02',
         title: 'Structural Integrity',
         subtitle: 'BEYOND-CODE FRAMING',
         description: 'True luxury requires an unshakable foundation. Our framing process utilizes premium lumber and rigorous engineered steel integrations, ensuring your home is built not just to pass inspection, but to endure for generations.',
-        image: 'https://images.unsplash.com/photo-1587582423116-ec07293f0395?q=70&w=1740&auto=format&fit=crop&fm=webp' // Framing image
+        image: '/images/process/structural-framing.webp' // Framing image
     },
     {
         id: '03',
         title: 'The Envelope',
         subtitle: 'CLIMATE & ACOUSTICS',
         description: 'A sanctuary must be silent and temperate. We utilize premium sheathing and closed-cell spray foam insulation, creating an invisible, impenetrable thermal shield against the outside world.',
-        image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=70&w=2000&auto=format&fit=crop&fm=webp' // Old bespoke finishes image used for envelope
+        image: '/images/process/building-envelope.webp' // Old bespoke finishes image used for envelope
     },
     {
         id: '04',
         title: 'Bespoke Finishes',
         subtitle: 'ARTISANAL MILLWORK',
         description: 'The final layer is where your personality lives. Our master craftsmen meticulously install custom cabinetry, hand-selected stone, and intricate millwork. It is in these final touches that a house truly becomes your bespoke home.',
-        image: 'https://images.unsplash.com/photo-1632583824020-937ae9564495?q=70&w=1258&auto=format&fit=crop&fm=webp' // Bespoke finishes
+        image: '/images/process/bespoke-finishes.webp' // Bespoke finishes
     }
 ];
 

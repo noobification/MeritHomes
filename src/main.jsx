@@ -1,16 +1,24 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root');
+
+const app = (
   <StrictMode>
-    <HelmetProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </HelmetProvider>
-  </StrictMode>,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
 );
+
+// Production pages are prerendered to static HTML; hydrate them so React
+// attaches to the existing markup instead of re-rendering from scratch.
+// In dev (empty #root) fall back to a normal client render.
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app);
+} else {
+  createRoot(container).render(app);
+}

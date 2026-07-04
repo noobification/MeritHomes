@@ -1,1 +1,4 @@
-/*    /index.html   200
+# All real pages are prerendered static files, which Netlify serves
+# directly. Anything that reaches this catch-all is an unknown URL and
+# must return a real 404 (not a soft-404 SPA shell).
+/*    /404.html   404

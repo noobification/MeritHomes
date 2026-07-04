@@ -7,6 +7,7 @@ import './Contact.css';
 const contactSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters."),
     email: z.string().email("Please enter a valid email address."),
+    phone: z.string().max(25, "Phone number is too long.").optional().or(z.literal('')),
     timeline: z.string(),
     message: z.string().min(10, "Outline must be at least 10 characters.").max(1000, "Outline is too long.")
 });
@@ -65,7 +66,10 @@ const Contact = () => {
 
                     <div className="detail-item">
                         <span className="detail-label">Direct</span>
-                        <p>Dominik: (630) 656-8229<br />Matt: (630) 863-0868</p>
+                        <p>
+                            Dominik: <a href="tel:+16306568229">(630) 656-8229</a><br />
+                            Matt: <a href="tel:+16308630868">(630) 863-0868</a>
+                        </p>
                     </div>
                 </div>
 
@@ -103,13 +107,18 @@ const Contact = () => {
 
                             <div className="form-group">
                                 <label htmlFor="name">Full Name</label>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required />
+                                <input type="text" id="name" name="name" placeholder="Your name" autoComplete="name" required />
                                 {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name[0]}</p>}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                                <input type="email" id="email" name="email" placeholder="you@email.com" autoComplete="email" required />
                                 {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email[0]}</p>}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="phone">Phone <span className="label-optional">(optional)</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="(630) 555-0100" autoComplete="tel" />
+                                {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone[0]}</p>}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="timeline">Expected Timeline</label>

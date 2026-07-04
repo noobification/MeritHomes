@@ -1,7 +1,7 @@
 # Merit Homes — Luxury Custom Home Builder
-# https://merithomes.com
+# https://buildmeritil.com
 
 User-agent: *
 Allow: /
 
-Sitemap: https://merithomes.com/sitemap.xml
+Sitemap: https://buildmeritil.com/sitemap.xml

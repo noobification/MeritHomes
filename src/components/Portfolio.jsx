@@ -3,7 +3,7 @@ import ThreeDHoverGallery from './magicui/3d-hover-gallery';
 import { AuroraTextEffect } from './magicui/aurora-text-effect';
 import './Portfolio.css';
 
-import img0 from '../assets/Luxury-homes-in-Dallas.jpg';
+import img0 from '../assets/luxury-custom-home-exterior-chicagoland.jpg';
 import img1 from '../assets/6402-800x1067.jpg';
 import img2 from '../assets/kitchen.jpg';
 import img3 from '../assets/rsz_freestanding-bathtub.jpg';

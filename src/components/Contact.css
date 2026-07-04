@@ -57,6 +57,25 @@
     line-height: 1.6;
 }
 
+.detail-item a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(188, 155, 106, 0.4);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.detail-item a:hover {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+.label-optional {
+    text-transform: none;
+    letter-spacing: 0.02em;
+    opacity: 0.55;
+    font-weight: 400;
+}
+
 .contact-form-wrapper {
     padding: 3rem 2.5rem;
     border-radius: var(--radius-ui);

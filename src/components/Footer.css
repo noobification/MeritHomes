@@ -36,7 +36,7 @@
 }
 
 .footer-tagline {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 0.9rem;
     max-width: 320px;
     line-height: 1.6;
@@ -73,7 +73,7 @@
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -102,6 +102,34 @@
     width: 100%;
 }
 
+.footer-service-areas {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-areas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+}
+
+.footer-areas-list a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+.footer-areas-list a:hover {
+    color: var(--accent-gold);
+}
+
 .footer-bottom {
     max-width: 1400px;
     margin: 0 auto;
@@ -110,7 +138,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.05em;
 }
 
@@ -121,7 +149,7 @@
 }
 
 .footer-legal a {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
     transition: color 0.3s ease;
 }

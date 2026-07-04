@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Philosophy = () => {
     const sectionRef = useRef(null);
-    console.log('Philosophy component render');
+
 
     useGSAP(() => {
         if (!sectionRef.current) return;

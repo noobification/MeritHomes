@@ -90,3 +90,30 @@
 .section {
   padding: var(--section-padding);
 }
+/* ---------- Accessibility polish ---------- */
+
+/* Keyboard focus: brand-gold ring on any focusable element */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect OS-level reduced-motion: collapse CSS animations/transitions
+   and restore the native cursor (JS animation layers check this media
+   query themselves). */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html body {
+    cursor: auto !important;
+  }
+}

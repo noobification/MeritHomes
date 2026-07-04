@@ -26,6 +26,9 @@ const StCharles = lazy(() => import('./pages/StCharles'));
 const NewLenox = lazy(() => import('./pages/NewLenox'));
 const Riverside = lazy(() => import('./pages/Riverside'));
 const Chicago = lazy(() => import('./pages/Chicago'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const Footer = lazy(() => import('./components/Footer'));
 const CustomCursor = lazy(() => import('./components/CustomCursor'));
@@ -70,8 +73,10 @@ function App() {
     };
 
     let cleanup = () => { };
-    // On mobile, we might skip Lenis entirely to save battery and CPU, or defer it heavily
-    if (window.innerWidth >= 768) {
+    // Skip smooth scrolling on mobile (battery/CPU) and for users who ask
+    // the OS for reduced motion.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (window.innerWidth >= 768 && !reducedMotion) {
       initSmoothScroll().then(fn => { if (fn) cleanup = fn; });
     }
 
@@ -114,6 +119,9 @@ function App() {
             <Route path="/new-lenox" element={<NewLenox />} />
             <Route path="/riverside" element={<Riverside />} />
             <Route path="/chicago" element={<Chicago />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
 

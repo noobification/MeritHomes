@@ -1,38 +1,17 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react';
+import React, { Suspense } from 'react';
 
-const ViewportTrigger = ({ children, fallback = <div className="h-screen bg-background" /> }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { rootMargin: '300px' } // Pre-load slightly before it enters the viewport
-        );
-
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
-    return (
-        <div ref={ref}>
-            {isVisible ? (
-                <Suspense fallback={fallback}>
-                    {children}
-                </Suspense>
-            ) : (
-                fallback
-            )}
-        </div>
-    );
-};
+// Sections must always render on the server so their content is present in
+// the prerendered HTML for crawlers. Lazy children still code-split: React
+// keeps the server-rendered markup visible while each chunk loads and
+// hydrates progressively, so below-the-fold JS stays off the critical path.
+// (The old IntersectionObserver gating rendered nothing server-side, which
+// hid all below-the-fold content from search engines.)
+const ViewportTrigger = ({ children, fallback = <div className="h-screen bg-background" /> }) => (
+    <div>
+        <Suspense fallback={fallback}>
+            {children}
+        </Suspense>
+    </div>
+);
 
 export default ViewportTrigger;

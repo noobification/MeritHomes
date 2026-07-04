@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { LOCATIONS } from '../config/site';
 import './Footer.css';
 
 const Footer = () => {
@@ -10,6 +12,7 @@ const Footer = () => {
                 <div className="footer-brand">
                     <h3 className="footer-logo">Merit Homes</h3>
                     <p className="footer-tagline">Luxury custom homes, built to last generations.</p>
+                    <p className="footer-tagline">Lemont, Illinois — serving Chicagoland's western suburbs and North Shore.</p>
                 </div>
 
                 <div className="footer-contact">
@@ -26,12 +29,23 @@ const Footer = () => {
                 </div>
             </div>
 
+            <nav className="footer-service-areas" aria-label="Service areas">
+                <p className="footer-label">Where We Build</p>
+                <ul className="footer-areas-list">
+                    {LOCATIONS.map(({ path, label }) => (
+                        <li key={path}>
+                            <Link to={path}>{label}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+
             <div className="footer-bottom">
                 <p>&copy; {currentYear} Merit Homes. All rights reserved.</p>
                 <div className="footer-legal">
-                    <a href="/privacy">Privacy Policy</a>
+                    <Link to="/privacy">Privacy Policy</Link>
                     <span className="footer-divider">|</span>
-                    <a href="/terms">Terms of Service</a>
+                    <Link to="/terms">Terms of Service</Link>
                 </div>
             </div>
         </footer>

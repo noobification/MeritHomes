@@ -1,6 +1,7 @@
 import React, { lazy } from 'react';
 import DeconstructionHero from '../components/DeconstructionHero';
 import ViewportTrigger from '../components/ViewportTrigger';
+import Seo from '../components/Seo';
 
 // Lazy load all below-the-fold components to defer their heavy animation dependencies
 const LineArtConstruction = lazy(() => import('../components/LineArtConstruction'));
@@ -12,6 +13,11 @@ const Contact = lazy(() => import('../components/Contact'));
 function Home() {
     return (
         <main>
+            <Seo
+                title="Luxury Custom Home Builder in Chicagoland | Merit Homes"
+                description="Merit Homes builds luxury custom homes and teardown rebuilds across Chicagoland's western suburbs — Hinsdale, Naperville, Oak Brook and beyond. Based in Lemont, IL. Free consultation."
+                path="/"
+            />
             <DeconstructionHero videoSrc="/Upscaled.webm" />
             <ViewportTrigger>
                 <Philosophy />
@@ -29,8 +35,9 @@ function Home() {
                 title="A team you can trust"
                 subtitle="Built on decades of excellence and integrity."
                 videoSrc="/hero-bg.mp4"
-                mobilePoster="https://images.unsplash.com/photo-1621673610286-a6b5e788ab82?q=70&w=1200&auto=format&fit=crop&fm=webp"
+                mobilePoster="/mobile-hero-poster.webp"
                 showScrollIndicator={false}
+                headingLevel="h2"
             />
             <ViewportTrigger>
                 <Contact />
